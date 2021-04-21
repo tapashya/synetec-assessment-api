@@ -4,9 +4,9 @@ using Newtonsoft.Json.Serialization;
 namespace SynetecAssessmentApi.Dtos
 {
     [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
-    public class BonusPoolCalculatorResultDto
+    public class CalculateBonusRequest
     {
-        public int Amount { get; set; }
-        public EmployeeDto Employee { get; set; }
+        public int TotalBonusPoolAmount { get; set; }
+        public int SelectedEmployeeId { get; set; }
     }
 }

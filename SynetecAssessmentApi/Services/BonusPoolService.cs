@@ -8,18 +8,42 @@ using System.Threading.Tasks;
 
 namespace SynetecAssessmentApi.Services
 {
-    public class BonusPoolService
+    public class BonusPoolService: IBonusPoolService
     {
         private readonly AppDbContext _dbContext;
 
-        public BonusPoolService()
+        public BonusPoolService(AppDbContext dbContext)
         {
-            var dbContextOptionBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            dbContextOptionBuilder.UseInMemoryDatabase(databaseName: "HrDb");
-
-            _dbContext = new AppDbContext(dbContextOptionBuilder.Options);
+            _dbContext = dbContext;            
         }
 
+        public async Task<EmployeeDto> GetEmployeeAsync(int selectedEmployeeId)
+        {
+            Employee employee = await _dbContext      
+                .Employees
+                .Include(e => e.Department)
+                .FirstOrDefaultAsync(item => item.Id == selectedEmployeeId);
+
+            if(employee != null)
+            {
+                return new EmployeeDto
+                {
+                    Id = employee.Id,
+                    Fullname = employee.Fullname,
+                    JobTitle = employee.JobTitle,
+                    Salary = employee.Salary,
+                    Department = new DepartmentDto
+                    {
+                        Title = employee.Department.Title,
+                        Description = employee.Department.Description
+                    }
+                };
+            }
+            else
+            {
+                throw new KeyNotFoundException("Employee not found");
+            }
+        }    
         public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync()
         {
             IEnumerable<Employee> employees = await _dbContext
@@ -34,6 +58,7 @@ namespace SynetecAssessmentApi.Services
                 result.Add(
                     new EmployeeDto
                     {
+                        Id = employee.Id,
                         Fullname = employee.Fullname,
                         JobTitle = employee.JobTitle,
                         Salary = employee.Salary,
@@ -54,30 +79,38 @@ namespace SynetecAssessmentApi.Services
             Employee employee = await _dbContext.Employees
                 .Include(e => e.Department)
                 .FirstOrDefaultAsync(item => item.Id == selectedEmployeeId);
-
-            //get the total salary budget for the company
-            int totalSalary = (int)_dbContext.Employees.Sum(item => item.Salary);
-
-            //calculate the bonus allocation for the employee
-            decimal bonusPercentage = (decimal)employee.Salary / (decimal)totalSalary;
-            int bonusAllocation = (int)(bonusPercentage * bonusPoolAmount);
-
-            return new BonusPoolCalculatorResultDto
+            if (employee != null)
             {
-                Employee = new EmployeeDto
-                {
-                    Fullname = employee.Fullname,
-                    JobTitle = employee.JobTitle,
-                    Salary = employee.Salary,
-                    Department = new DepartmentDto
-                    {
-                        Title = employee.Department.Title,
-                        Description = employee.Department.Description
-                    }
-                },
 
-                Amount = bonusAllocation
-            };
+                //get the total salary budget for the company
+                int totalSalary = (int)_dbContext.Employees.Sum(item => item.Salary);
+
+                //calculate the bonus allocation for the employee
+                decimal bonusPercentage = (decimal)employee.Salary / (decimal)totalSalary;
+                int bonusAllocation = (int)(bonusPercentage * bonusPoolAmount);
+
+                return new BonusPoolCalculatorResultDto
+                {
+                    Employee = new EmployeeDto
+                    {
+                        Id = employee.Id,
+                        Fullname = employee.Fullname,
+                        JobTitle = employee.JobTitle,
+                        Salary = employee.Salary,
+                        Department = new DepartmentDto
+                        {
+                            Title = employee.Department.Title,
+                            Description = employee.Department.Description
+                        }
+                    },
+
+                    Amount = bonusAllocation
+                };
+            }
+            else
+            {
+                throw new KeyNotFoundException("Employee not found");
+            }
         }
     }
 }

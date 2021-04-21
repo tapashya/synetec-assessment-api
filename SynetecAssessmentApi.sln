@@ -3,11 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynetecAssessmentApi", "SynetecAssessmentApi\SynetecAssessmentApi.csproj", "{5BCB6360-6A89-4338-9863-7455B8480B20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SynetecAssessmentApi", "SynetecAssessmentApi\SynetecAssessmentApi.csproj", "{5BCB6360-6A89-4338-9863-7455B8480B20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynetecAssessmentApi.Domain", "SynetecAssessmentApi.Domain\SynetecAssessmentApi.Domain.csproj", "{7B58C9C7-0C36-49AE-B472-ADF9C00B61D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SynetecAssessmentApi.Domain", "SynetecAssessmentApi.Domain\SynetecAssessmentApi.Domain.csproj", "{7B58C9C7-0C36-49AE-B472-ADF9C00B61D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynetecAssessmentApi.Persistence", "SynetecAssessment.Persistence\SynetecAssessmentApi.Persistence.csproj", "{72F75F99-9031-4DD6-B646-4926BC527038}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SynetecAssessmentApi.Persistence", "SynetecAssessment.Persistence\SynetecAssessmentApi.Persistence.csproj", "{72F75F99-9031-4DD6-B646-4926BC527038}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EmployeeBonusClientApp", "EmployeeBonusClientApp\", "{6B3A2D0E-0B21-4096-92B9-4B98C4B5C4F2}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_55344"
+		Debug.AspNetCompiler.PhysicalPath = "EmployeeBonusClientApp\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55344\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_55344"
+		Release.AspNetCompiler.PhysicalPath = "EmployeeBonusClientApp\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55344\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "55344"
+		SlnRelativePath = "EmployeeBonusClientApp\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynetecAssessmentApiTests", "SynetecAssessmentApiTests\SynetecAssessmentApiTests.csproj", "{890E726A-D80E-42CE-B16E-EE45FFBE0AF6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5BCB6360-6A89-4338-9863-7455B8480B20} = {5BCB6360-6A89-4338-9863-7455B8480B20}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +53,14 @@ Global
 		{72F75F99-9031-4DD6-B646-4926BC527038}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72F75F99-9031-4DD6-B646-4926BC527038}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72F75F99-9031-4DD6-B646-4926BC527038}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B3A2D0E-0B21-4096-92B9-4B98C4B5C4F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B3A2D0E-0B21-4096-92B9-4B98C4B5C4F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B3A2D0E-0B21-4096-92B9-4B98C4B5C4F2}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B3A2D0E-0B21-4096-92B9-4B98C4B5C4F2}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{890E726A-D80E-42CE-B16E-EE45FFBE0AF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{890E726A-D80E-42CE-B16E-EE45FFBE0AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{890E726A-D80E-42CE-B16E-EE45FFBE0AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{890E726A-D80E-42CE-B16E-EE45FFBE0AF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

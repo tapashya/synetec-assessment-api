@@ -1,0 +1,25 @@
+<h1>Employees</h1>
+
+<p *ngIf="!(employees$ | async)"><em>Loading...</em></p>
+<table class="table table-sm table-hover" *ngIf="(employees$ | async)?.length>0">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Job Title</th>
+      <th>Department</th>
+      <th>Salary</th>
+      <th></th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of (employees$ | async)">
+      <td>{{ employee.id }}</td>
+      <td><a [routerLink]="['/employee/', employee.id]">{{ employee.fullname }}</a></td>
+      <td>{{ employee.jobTitle }}</td>
+      <td>{{ employee.department.title }}</td>
+      <td>{{ employee.salary }}</td>
+      <td><a [routerLink]="['/employee/', employee.id]" class="btn btn-primary btn-sm float-right">Calculate Bonus</a></td>
+    </tr>
+  </tbody>
+</table>

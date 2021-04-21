@@ -1,0 +1,26 @@
+<ng-container *ngIf="(employee$ | async) as employee; else loadingError">
+
+  <h1>{{ employee.fullname }}</h1>
+  <ul>
+    <li>Dept: {{ employee.department.title }}</li>
+    <li *ngIf="(bonusResult$ | async) as bonusResult;"><span style="color: red;">Bonus: {{ bonusResult.amount }}</span></li>
+  </ul>
+  <form [formGroup]="myForm" (ngSubmit)="calculateBonus()" #formDir="ngForm" novalidate>
+    <div class="form-group row">
+      <label class=" control-label col-md-12">Total Bonus Pot</label>
+      <div class="col-md-12">
+        <input class="form-control" type="number" formControlName="totalBonusPot" min="0" max="2147483647" required ng-model="totalBonusPot">
+      </div>
+      <div class="text-danger ml-3" *ngIf="f.totalBonusPot.errors && formDir.submitted">
+        Valid total bonus pot is required between 0 and 2,147,483,647
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-success float-right">Calculate</button>
+      <button class="btn btn-secondary float-left" (click)="back()">Back</button>
+    </div>
+  </form>
+
+
+</ng-container>
+<ng-template #loadingError>Employee Not Found</ng-template>
